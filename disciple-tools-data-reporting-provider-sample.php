@@ -75,7 +75,6 @@ function dt_data_reporting_provider_sample_plugin() {
      * Don't load the plugin on every rest request. Only those with the 'sample' namespace
      */
     $is_rest = dt_is_rest();
-    //@todo change 'sample' if you want the plugin to be set up when using rest api calls other than ones with the 'sample' namespace
     if ( ! $is_rest ){
         return DT_Data_Reporting_Provider_Sample_Plugin::get_instance();
     }
@@ -213,8 +212,43 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
 
         if ( is_admin() ) {
             // adds links to the plugin description area in the plugin admin list.
-            add_filter( 'plugin_row_meta', [ $this, 'plugin_description_links' ], 10, 4 );
+            add_filter('plugin_row_meta', [$this, 'plugin_description_links'], 10, 4);
+
+            add_filter('dt_data_reporting_providers', [$this, 'data_reporting_providers'], 10, 4);
+            add_action('dt_data_reporting_export_provider_sample-provider', [$this, 'data_reporting_export'], 10, 4);
         }
+    }
+
+    /**
+     * Config a new provider to be available in the Data Reporting Plugin
+     * @param $providers
+     * @return mixed
+     */
+    public function data_reporting_providers($providers) {
+        $providers ['sample-provider'] = [
+            'name' => 'My Sample Provider',
+            'fields' => [
+                'sample_key' => [
+                    'label' => 'My Sample Key',
+                    'type' => 'text',
+                    'helpText' => 'This is a sample key you need to authenticate with this provider'
+                ]
+            ]
+        ];
+        return $providers;
+    }
+
+  /**
+   * Process the data retrieving by the Data Reporting Plugin and send to custom provider
+   * @param array $columns
+   * @param array $rows
+   * @param string $type
+   * @param array $config
+   */
+    public function data_reporting_export( $columns, $rows, $type, $config ) {
+        echo '<li>Sending to provider from hook</li>';
+        echo '<li>Items: ' . count($rows) . '</li>';
+        echo '<li>Config: ' . print_r($config, true) . '</li>';
     }
 
     /**
