@@ -1,9 +1,6 @@
-[![Build Status](https://travis-ci.com/DiscipleTools/disciple-tools-starter-plugin-template.svg?branch=master)](https://travis-ci.com/DiscipleTools/disciple-tools-starter-plugin-template)
-
-# Disciple Tools Starter Plugin
-The Disciple Tools Starter Plugin is intended to accelerate integrations and extensions to the Disciple Tools system.
-This basic plugin starter has some of the basic elements to quickly launch and extension project in the pattern of
-the Disciple Tools system.
+# Disciple Tools Data Reporting Provider Sample
+Disciple Tools Data Reporting - Custom Provider facilitates the addtion of custom providers to the [Disciple Tools Data Reporting plugin](https://github.com/cairocoder01/disciple-tools-data-reporting).
+This basic plugin starter has some of the basic elements to quickly launch a custom provider.
 
 
 ### The starter plugin is equipped with:
@@ -16,7 +13,7 @@ the Disciple Tools system.
 1. Starter Admin menu and options page with tabs.
 
 ### Refactoring this plugin as your own:
-1. Refactor all occurrences of the name `Starter_Plugin`, `starter_plugin`, `starter-plugin`, and `Starter Plugin` with you're own plugin
-name for the `disciple-tools-starter-plugin.php and admin-menu-and-tabs.php files.
+1. Refactor all occurrences of the name `DT_Data_Reporting_Provider_Sample`, `dt_data_reporting_provider_sample`, `data-reporting-provider-sample`, and `Data Reporting Provider Sample` with your own plugin
+1. Rename the `disciple-tools-data-reporting-provider-sample.php files.
 1. Update the README.md and LICENSE
 1. Update the translation strings inside `default.pot` file with a multilingual software like POEdit, if you intend to make your plugin multilingual.
