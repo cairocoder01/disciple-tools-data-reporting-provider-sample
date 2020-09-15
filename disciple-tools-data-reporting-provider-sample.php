@@ -250,6 +250,11 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
         echo '<li>Sending to provider from hook</li>';
         echo '<li>Items: ' . count($rows) . '</li>';
         echo '<li>Config: ' . print_r($config, true) . '</li>';
+
+        // Ensure that you return a boolean from this function. This is used to keep track of where partial exports leave off.
+        // If the export was a success, return true.
+        // If the export failed for any reason, return false.
+        return true;
     }
 
     public function data_reporting_tab( ) {
