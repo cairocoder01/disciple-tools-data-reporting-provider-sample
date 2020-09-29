@@ -1,8 +1,9 @@
 name: Release
 
-on:
-  push:
-# === Uncomment the below to run build only when tags starting with "v" are pushed
+on: push
+# === Uncomment the lines below and delete the line above to run build only when tags starting with "v" are pushed
+#on:
+#  push:
 #    tags:
 #    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
