@@ -212,11 +212,11 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
 
         if ( is_admin() ) {
             // adds links to the plugin description area in the plugin admin list.
-            add_filter('plugin_row_meta', [$this, 'plugin_description_links'], 10, 4);
+            add_filter( 'plugin_row_meta', [ $this, 'plugin_description_links' ], 10, 4 );
 
-            add_filter('dt_data_reporting_providers', [$this, 'data_reporting_providers'], 10, 4);
-            add_filter('dt_data_reporting_export_provider_sample-provider', [$this, 'data_reporting_export'], 10, 4);
-            add_action('dt_data_reporting_tab_provider_sample-provider', [$this, 'data_reporting_tab'], 10, 1);
+            add_filter( 'dt_data_reporting_providers', [ $this, 'data_reporting_providers' ], 10, 4 );
+            add_filter( 'dt_data_reporting_export_provider_sample-provider', [ $this, 'data_reporting_export' ], 10, 4 );
+            add_action( 'dt_data_reporting_tab_provider_sample-provider', [ $this, 'data_reporting_tab' ], 10, 1 );
         }
     }
 
@@ -225,7 +225,7 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
      * @param $providers
      * @return mixed
      */
-    public function data_reporting_providers($providers) {
+    public function data_reporting_providers( $providers) {
         $providers ['sample-provider'] = [
             'name' => 'My Sample Provider',
             'fields' => [
@@ -270,17 +270,17 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
 
 
         $result['messages'][] = [
-            'message' => 'Debug config: ' . print_r($config, true),
+            'message' => 'Debug config: ' . print_r( $config, true ),
         ];
 
         return $result;
     }
 
-    public function data_reporting_tab( ) {
-      ?>
+    public function data_reporting_tab() {
+        ?>
       <h2>My Sample Provider</h2>
       <p>Add here any getting started or how-to information that is needed for your provider</p>
-      <?php
+        <?php
     }
 
     /**
