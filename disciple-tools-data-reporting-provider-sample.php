@@ -215,7 +215,7 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
             add_filter('plugin_row_meta', [$this, 'plugin_description_links'], 10, 4);
 
             add_filter('dt_data_reporting_providers', [$this, 'data_reporting_providers'], 10, 4);
-            add_action('dt_data_reporting_export_provider_sample-provider', [$this, 'data_reporting_export'], 10, 4);
+            add_filter('dt_data_reporting_export_provider_sample-provider', [$this, 'data_reporting_export'], 10, 4);
             add_action('dt_data_reporting_tab_provider_sample-provider', [$this, 'data_reporting_tab'], 10, 1);
         }
     }
@@ -247,14 +247,33 @@ class DT_Data_Reporting_Provider_Sample_Plugin {
    * @param array $config
    */
     public function data_reporting_export( $columns, $rows, $type, $config ) {
-        echo '<li>Sending to provider from hook</li>';
-        echo '<li>Items: ' . count($rows) . '</li>';
-        echo '<li>Config: ' . print_r($config, true) . '</li>';
+        // Return this result object at the end of your export process.
+        // `success` should be set to true when you are sure that errors haven't happen. It is
+        //   used to track the last exported values for differential exports.
+        // `messages` is an array of messages to be added to the log.
+        //   An optional type of `error` or `success` can be added for formatting
+        $result = [
+            'success' => false,
+            'messages' => array(),
+        ];
+        $result['messages'][] = [
+            'message' => 'This is a normal log message'
+        ];
+        $result['messages'][] = [
+            'type' => 'error',
+            'message' => 'This is an error log message'
+        ];
+        $result['messages'][] = [
+            'type' => 'success',
+            'message' => 'This is a success log message'
+        ];
 
-        // Ensure that you return a boolean from this function. This is used to keep track of where partial exports leave off.
-        // If the export was a success, return true.
-        // If the export failed for any reason, return false.
-        return true;
+
+        $result['messages'][] = [
+            'message' => 'Debug config: ' . print_r($config, true),
+        ];
+
+        return $result;
     }
 
     public function data_reporting_tab( ) {
